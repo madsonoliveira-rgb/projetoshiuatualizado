@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shiu | Adicionar produto</title>
+    <meta name="description" content="Adicione um produto ao catálogo do Shiu.">
+    <link rel="preload" href="{{ url_for('static', filename='fonts/Outfit-latin.woff') }}" as="font" type="font/woff" crossorigin>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}?v=12">
+</head>
+<body class="page-form page-adicionar">
+
+    <svg class="svg-sprite" aria-hidden="true" focusable="false">
+        <symbol id="i-mic" viewBox="0 0 24 24"><rect x="9" y="2.5" width="6" height="11.5" rx="3"/><path d="M18.5 10.5v1a6.5 6.5 0 0 1-13 0v-1"/><path d="M12 18v3.5"/><path d="M8.5 21.5h7"/></symbol>
+        <symbol id="i-arrow" viewBox="0 0 24 24"><path d="M4.5 12h15"/><path d="m13 5.5 6.5 6.5-6.5 6.5"/></symbol>
+        <symbol id="i-back" viewBox="0 0 24 24"><path d="M19.5 12h-15"/><path d="m11 5.5-6.5 6.5 6.5 6.5"/></symbol>
+        <symbol id="i-mail" viewBox="0 0 24 24"><rect x="3" y="5.5" width="18" height="13" rx="2.5"/><path d="m3.8 7 8.2 6 8.2-6"/></symbol>
+        <symbol id="i-lock" viewBox="0 0 24 24"><rect x="4.5" y="10.5" width="15" height="10" rx="2.5"/><path d="M8 10.5V7.8a4 4 0 0 1 8 0v2.7"/></symbol>
+        <symbol id="i-user" viewBox="0 0 24 24"><circle cx="12" cy="8.5" r="4"/><path d="M4.5 20.5a7.5 7.5 0 0 1 15 0"/></symbol>
+        <symbol id="i-search" viewBox="0 0 24 24"><circle cx="10.5" cy="10.5" r="6.75"/><path d="m15.5 15.5 5 5"/></symbol>
+        <symbol id="i-home" viewBox="0 0 24 24"><path d="M3.5 11 12 4l8.5 7"/><path d="M5.5 9.5V20h13V9.5"/></symbol>
+        <symbol id="i-plus" viewBox="0 0 24 24"><path d="M12 5v14"/><path d="M5 12h14"/></symbol>
+        <symbol id="i-logout" viewBox="0 0 24 24"><path d="M14 4.5h4a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2h-4"/><path d="M10 16.5 5.5 12 10 7.5"/><path d="M5.5 12H15"/></symbol>
+        <symbol id="i-chevron" viewBox="0 0 24 24"><path d="m6 9.5 6 6 6-6"/></symbol>
+        <symbol id="i-level" viewBox="0 0 24 24"><path d="M5 19.5v-4"/><path d="M10 19.5v-8"/><path d="M15 19.5v-11.5"/><path d="M20 19.5V4.5"/></symbol>
+        <symbol id="i-link" viewBox="0 0 24 24"><path d="M10 14a4.5 4.5 0 0 0 6.4 0l3-3a4.5 4.5 0 0 0-6.4-6.4l-1.2 1.2"/><path d="M14 10a4.5 4.5 0 0 0-6.4 0l-3 3a4.5 4.5 0 0 0 6.4 6.4l1.2-1.2"/></symbol>
+        <symbol id="i-tag" viewBox="0 0 24 24"><path d="M3.5 12.6V4.5a1 1 0 0 1 1-1h8.1l8 8a1.5 1.5 0 0 1 0 2.1l-7 7a1.5 1.5 0 0 1-2.1 0z"/><circle cx="8.3" cy="8.3" r="1.4"/></symbol>
+    </svg>
+
+    <header class="site-header mic-header">
+        <div class="container nav-row">
+            <a class="logo" href="{{ url_for('home') }}" aria-label="shiu — página inicial" data-enter style="--rd: 0ms">
+                <span class="logo-text">shiu</span>
+                <span class="logo-bars" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></span>
+            </a>
+            {% set nav_page = 'adicionar' %}
+            {% include '_nav.html' %}
+        </div>
+    </header>
+
+    <main class="form-stage">
+        <div class="atmos atmos-form" aria-hidden="true">
+            <span class="glow g-form a-drift-a"></span>
+            <span class="glow g-form-cyan a-drift-b"></span>
+            <svg class="rings rings-form a-drift-c" viewBox="-700 -700 1400 1400" focusable="false">
+                <defs>
+                    <radialGradient id="r-adicionar-body" cx="0" cy="0" r="470" gradientUnits="userSpaceOnUse">
+                        <stop offset="0" stop-color="#123B85" stop-opacity="0"/>
+                        <stop offset=".72" stop-color="#123B85" stop-opacity=".18"/>
+                        <stop offset=".96" stop-color="#355A91" stop-opacity=".42"/>
+                        <stop offset="1" stop-color="#355A91" stop-opacity="0"/>
+                    </radialGradient>
+                </defs>
+                <circle class="body" r="470" fill="url(#r-adicionar-body)"/>
+                <g class="a-breathe"><circle class="ring" r="300"/><circle class="ring" r="380"/><circle class="ring ring-strong" r="470"/><circle class="ring" r="570"/><circle class="ring" r="680"/></g>
+                <circle class="rim a-spin" r="470" stroke="#48CBFF" stroke-opacity=".7" stroke-dasharray="590 2362"/>
+                <circle class="rim a-spin-rev" r="570" stroke="#6199F6" stroke-opacity=".45" stroke-dasharray="429 3151"/>
+            </svg>
+            <svg class="form-arc" viewBox="-700 -700 1400 1400" focusable="false">
+                <defs>
+                    <linearGradient id="fa-adicionar-g" x1="-357" y1="0" x2="357" y2="0" gradientUnits="userSpaceOnUse">
+                        <stop offset="0" stop-color="#2D78FF" stop-opacity="0"/>
+                        <stop offset=".3" stop-color="#6199F6" stop-opacity=".8"/>
+                        <stop offset=".7" stop-color="#48CBFF" stop-opacity=".8"/>
+                        <stop offset="1" stop-color="#48CBFF" stop-opacity="0"/>
+                    </linearGradient>
+                    <mask id="fa-adicionar-m" maskUnits="userSpaceOnUse" x="-700" y="-700" width="1400" height="1400">
+                        <rect x="-700" y="-700" width="1400" height="1400" fill="url(#fa-adicionar-g)"/>
+                    </mask>
+                </defs>
+                <g mask="url(#fa-adicionar-m)">
+                    <path class="run run-tail" d="M -357.08 129.97 A 380 380 0 0 0 357.08 129.97" pathLength="1000"/>
+                    <path class="run run-head" d="M -357.08 129.97 A 380 380 0 0 0 357.08 129.97" pathLength="1000"/>
+                </g>
+            </svg>
+            <span class="veil-form"></span>
+        </div>
+
+        <div class="container form-inner">
+            <a class="back-link" href="{% if current_user.is_authenticated %}{{ url_for('perfil') }}{% else %}{{ url_for('home') }}{% endif %}" data-enter style="--rd: 40ms">
+                <svg class="ico" aria-hidden="true"><use href="#i-back"/></svg>
+                {% if current_user.is_authenticated %}Voltar ao perfil{% else %}Voltar à página inicial{% endif %}
+            </a>
+
+            <section class="form-panel form-panel--wide" aria-labelledby="add-title" data-enter style="--rd: 120ms">
+                <header class="form-head">
+                    <p class="eyebrow">Catálogo</p>
+                    <h1 id="add-title" class="form-title">Adicionar produto</h1>
+                    <p class="form-lead">Informe a marca, o nome, a categoria, o nível de barulho e o link da imagem.</p>
+                </header>
+
+                {% if resposta %}
+                <p class="form-msg form-msg--ok" role="status">{{ resposta }}</p>
+                {% endif %}
+
+                <form class="form-grid form-grid--2" action="/adicionar" method="POST">
+                    <div class="field">
+                        <label for="add-marca">Marca</label>
+                        <div class="control">
+                            <select id="add-marca" name="id_marca" required>
+                                <option value="">Selecione uma marca</option>
+                                <option value="38">Nenhuma das opções abaixo</option>
+                                <option value="1">Arno</option>
+                                <option value="2">Mondial</option>
+                                <option value="3">Britânia</option>
+                                <option value="4">Mallory</option>
+                                <option value="5">Ventisol</option>
+                                <option value="6">WAP</option>
+                                <option value="7">Branco</option>
+                                <option value="8">Husqvarna</option>
+                                <option value="9">Intech Machine</option>
+                                <option value="10">Makita</option>
+                                <option value="11">Negano</option>
+                                <option value="12">Nakasaki</option>
+                                <option value="13">Buffalo</option>
+                                <option value="14">Coyote</option>
+                                <option value="15">Daikin</option>
+                                <option value="16">ECHO</option>
+                                <option value="17">Gartene</option>
+                                <option value="18">Garland</option>
+                                <option value="19">Matsuyama</option>
+                                <option value="20">Oleo-Mac</option>
+                                <option value="21">Siga Tools</option>
+                                <option value="22">Vonder</option>
+                                <option value="23">Taiff</option>
+                                <option value="24">Philco</option>
+                                <option value="25">Karcher</option>
+                                <option value="26">Electrolux</option>
+                                <option value="27">Black+Decker</option>
+                                <option value="28">Taiff</option>
+                                <option value="29">Philco</option>
+                                <option value="30">Karcher</option>
+                                <option value="31">Electrolux</option>
+                                <option value="32">Black+Decker</option>
+                                <option value="33">Gama Italy</option>
+                                <option value="34">Conair</option>
+                                <option value="35">Stihl</option>
+                                <option value="36">Bosch</option>
+                                <option value="37">Dyson</option>
+                            </select>
+                            <svg class="ico chevron" aria-hidden="true"><use href="#i-chevron"/></svg>
+                        </div>
+                    </div>
+
+                    <div class="field">
+                        <label for="add-categoria">Categoria</label>
+                        <div class="control">
+                            <select id="add-categoria" name="categoria_produto">
+                                <option value="limpeza domestica">Limpeza doméstica</option>
+                                <option value="eletrodomestico">Eletrodomésticos</option>
+                                <option value="casa e construcao">Casa e Construção</option>
+                                <option value="itens de beleza">Itens de beleza</option>
+                            </select>
+                            <svg class="ico chevron" aria-hidden="true"><use href="#i-chevron"/></svg>
+                        </div>
+                    </div>
+
+                    <div class="field field-span">
+                        <label for="add-nome">Nome do produto</label>
+                        <div class="control has-ico">
+                            <svg class="ico" aria-hidden="true"><use href="#i-tag"/></svg>
+                            <input id="add-nome" type="text" name="nome_produto" required placeholder="Ex.: Ventilador de mesa 40 cm">
+                        </div>
+                    </div>
+
+                    <div class="field">
+                        <label for="add-barulho">Nível de barulho</label>
+                        <div class="control has-ico has-unit">
+                            <svg class="ico" aria-hidden="true"><use href="#i-level"/></svg>
+                            <input id="add-barulho" type="number" name="barulho" required placeholder="Ex.: 52" aria-describedby="add-barulho-unidade">
+                            <span class="unit" id="add-barulho-unidade">dB</span>
+                        </div>
+                    </div>
+
+                    <div class="field">
+                        <label for="add-link">Link da imagem</label>
+                        <div class="control has-ico">
+                            <svg class="ico" aria-hidden="true"><use href="#i-link"/></svg>
+                            <input id="add-link" type="url" name="link_imagem" required placeholder="https://…">
+                        </div>
+                    </div>
+
+                    <div class="form-actions field-span">
+                        <button class="btn btn-lg shiny-cta form-submit" type="submit">
+                            <svg class="ico" aria-hidden="true"><use href="#i-plus"/></svg>
+                            Adicionar produto
+                        </button>
+                    </div>
+                </form>
+            </section>
+        </div>
+    </main>
+
+    <footer class="site-footer mic-footer">
+        <div class="container footer-row">
+            <a class="logo logo-sm" href="{{ url_for('home') }}" aria-label="shiu — página inicial">
+                <span class="logo-text">shiu</span>
+                <span class="logo-bars" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></span>
+            </a>
+            <span class="footer-sep" aria-hidden="true"></span>
+            <p>Informação sonora com clareza.</p>
+        </div>
+    </footer>
+
+    <script src="{{ url_for('static', filename='script/motion.js') }}?v=11" defer></script>
+    <script src="{{ url_for('static', filename='script/nav.js') }}?v=9" defer></script>
+</body>
+</html>

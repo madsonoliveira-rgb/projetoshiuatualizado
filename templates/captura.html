@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shiu | Som do ambiente</title>
+    <link rel="preload" href="{{ url_for('static', filename='fonts/Outfit-latin.woff') }}" as="font" type="font/woff" crossorigin>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}?v=12">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <!--Chamada da API vliubras-->
+    <script src="https://vlibras.gov.br/app/vlibras-plugin.js"></script>
+</head>
+<body class="page-mic">
+
+    <svg class="svg-sprite" aria-hidden="true" focusable="false">
+        <symbol id="i-mic" viewBox="0 0 24 24"><rect x="9" y="2.5" width="6" height="11.5" rx="3"/><path d="M18.5 10.5v1a6.5 6.5 0 0 1-13 0v-1"/><path d="M12 18v3.5"/><path d="M8.5 21.5h7"/></symbol>
+        <symbol id="i-mic-solid" viewBox="0 0 24 24"><rect fill="currentColor" stroke="none" x="8.6" y="2" width="6.8" height="12.2" rx="3.4"/><path d="M18.4 10.6v.9a6.4 6.4 0 0 1-12.8 0v-.9"/><path d="M12 18v3.3"/><path d="M8.4 21.4h7.2"/></symbol>
+        <symbol id="i-back" viewBox="0 0 24 24"><path d="M19.5 12h-15"/><path d="m11 5.5-6.5 6.5 6.5 6.5"/></symbol>
+        <symbol id="i-info" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9.5"/><path d="M12 16.5v-5"/><path d="M12 7.6v.1"/></symbol>
+        <symbol id="i-vol1" viewBox="0 0 24 24"><path fill="currentColor" stroke="none" d="M2.5 9h3.8L11 5v14l-4.7-4H2.5z"/><path d="M15 9a4.2 4.2 0 0 1 0 6"/></symbol>
+        <symbol id="i-vol2" viewBox="0 0 24 24"><path fill="currentColor" stroke="none" d="M2.5 9h3.8L11 5v14l-4.7-4H2.5z"/><path d="M14.6 9.2a4 4 0 0 1 0 5.6"/><path d="M17.4 6.6a7.6 7.6 0 0 1 0 10.8"/></symbol>
+        <symbol id="i-vol3" viewBox="0 0 24 24"><path fill="currentColor" stroke="none" d="M2 9h3.6L10.2 5v14l-4.6-4H2z"/><path d="M14 9.4a3.6 3.6 0 0 1 0 5.2"/><path d="M16.7 7a7 7 0 0 1 0 10"/><path d="M19.4 4.6a10.4 10.4 0 0 1 0 14.8"/></symbol>
+    </svg>
+
+    <header class="site-header mic-header">
+        <div class="container nav-row">
+            <a class="logo" href="{{ url_for('home') }}" aria-label="shiu — página inicial" data-enter style="--rd: 0ms">
+                <span class="logo-text">shiu</span>
+                <span class="logo-bars" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></span>
+            </a>
+            {% set nav_page = 'mic' %}
+            {% include '_nav.html' %}
+        </div>
+    </header>
+
+    <main class="mic-stage">
+        <canvas class="wave-canvas" aria-hidden="true"></canvas>
+
+        <div class="container mic-inner">
+            <a class="back-link" href="{{ url_for('home') }}#catalogo" data-enter style="--rd: 40ms">
+                <svg class="ico" aria-hidden="true"><use href="#i-back"/></svg>
+                Voltar aos produtos
+            </a>
+
+            <div class="mic-head" data-enter style="--rd: 90ms">
+                <h1 class="mic-title">Som do ambiente</h1>
+                <p class="mic-sub">Inicie o microfone para acompanhar o nível de som.</p>
+            </div>
+
+            <div class="panel-wrap">
+                <div class="atmos atmos-mic" aria-hidden="true">
+                    <span class="glow g-mic a-drift-c"></span>
+                    <span class="glow g-mic-cyan a-drift-b"></span>
+                    <svg class="rings rings-mic" viewBox="-700 -700 1400 1400" focusable="false">
+                        <defs>
+                            <radialGradient id="rm-body" cx="0" cy="0" r="470" gradientUnits="userSpaceOnUse">
+                                <stop offset="0" stop-color="#123B85" stop-opacity="0"/>
+                                <stop offset=".72" stop-color="#123B85" stop-opacity=".18"/>
+                                <stop offset=".96" stop-color="#355A91" stop-opacity=".42"/>
+                                <stop offset="1" stop-color="#355A91" stop-opacity="0"/>
+                            </radialGradient>
+                        </defs>
+                        <circle class="body" r="470" fill="url(#rm-body)"/>
+                        <g class="a-breathe"><circle class="ring" r="300"/><circle class="ring" r="380"/><circle class="ring ring-strong" r="470"/><circle class="ring" r="570"/><circle class="ring" r="680"/></g>
+                        <circle class="rim a-spin" r="470" stroke="#48CBFF" stroke-opacity=".16" style="stroke-width:9" stroke-dasharray="590 2362"/>
+                        <circle class="rim a-spin" r="470" stroke="#48CBFF" stroke-opacity=".85" stroke-dasharray="590 2362"/>
+                        <circle class="rim a-spin-rev" r="570" stroke="#6199F6" stroke-opacity=".5" stroke-dasharray="429 3151"/>
+                    </svg>
+                    <span class="veil-mic"></span>
+                </div>
+                <section class="mic-panel" aria-label="Medição do nível de som" data-enter style="--rd: 160ms">
+                    <span class="mic-badge" aria-hidden="true"><svg class="ico"><use href="#i-mic-solid"/></svg></span>
+                    <h2 class="mic-label">Nível atual</h2>
+                    <div id="valor" class="db-badge" aria-live="polite">0.00</div>
+                    <span id="tag-status" class="status-tag baixo">Aguardando...</span>
+
+                    <button id="botao" class="btn btn-mic shiny-cta" type="button" onclick="alternar()">
+                        <i class="fas fa-microphone"></i> Iniciar microfone
+                    </button>
+                    <p class="mic-hint">O navegador solicitará acesso ao microfone.</p>
+
+                    <p class="mic-note">
+                        <svg class="ico" aria-hidden="true"><use href="#i-info"/></svg>
+                        A leitura varia conforme o microfone e o dispositivo.
+                    </p>
+
+                    <!-- Mantido para o script de áudio, que atualiza o src; oculto por CSS -->
+                    <img id="imagem-card" class="imagem-card" src="{{ url_for('static', filename='img/som_baixo.png') }}" alt="">
+                </section>
+            </div>
+
+            <section class="levels" aria-labelledby="levels-title" data-enter style="--rd: 240ms">
+                <h2 id="levels-title">Classificações do teste</h2>
+                <ul class="levels-list">
+                    <li class="level-chip baixo"><svg class="ico" aria-hidden="true"><use href="#i-vol1"/></svg>Silencioso</li>
+                    <li class="level-chip moderado"><svg class="ico" aria-hidden="true"><use href="#i-vol2"/></svg>Moderado</li>
+                    <li class="level-chip alto"><svg class="ico" aria-hidden="true"><use href="#i-vol2"/></svg>Alto</li>
+                    <li class="level-chip muito-alto"><svg class="ico" aria-hidden="true"><use href="#i-vol3"/></svg>Muito alto</li>
+                </ul>
+            </section>
+        </div>
+    </main>
+
+    <footer class="site-footer mic-footer">
+        <div class="container footer-row" data-reveal style="--rd: 300ms">
+            <a class="logo logo-sm" href="{{ url_for('home') }}" aria-label="shiu — página inicial">
+                <span class="logo-text">shiu</span>
+                <span class="logo-bars" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></span>
+            </a>
+            <span class="footer-sep" aria-hidden="true"></span>
+            <p>Informação sonora com clareza.</p>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="{{ url_for('static', filename='script/audio.js') }}"></script>
+    <script src="{{ url_for('static', filename='script/motion.js') }}?v=11" defer></script>
+    <script src="{{ url_for('static', filename='script/nav.js') }}?v=9" defer></script>
+    <script src="{{ url_for('static', filename='script/visual-effects.js') }}?v=9" defer></script>
+</body>
+</html>
